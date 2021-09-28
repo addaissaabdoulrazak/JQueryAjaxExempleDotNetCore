@@ -1,0 +1,42 @@
+﻿<spanp id="SpanMessage"></spanp>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    //il faut obligatoirement que le Document soit entre parathèse : remarque
+    $(document).ready(function () {
+        val1 = 5;
+        val2 = 2;
+
+        //utilisation la methodes ajax() de jquery pour envoyer les donner coté serveur c'est a dire au controllers
+        @*$.ajax({
+            type: "POST",
+            url: "@Url.Action("Add")",
+            data: { number1:val1, number2:val2 },
+            datatype: "text",
+            success: function (msg) {
+                document.getElementById("SpanMessage").textContent = "somme ="+ msg;
+
+
+            },
+            error: function (req,status,error) {
+
+                document.getElementById("SpanMessage").textContent = error;
+
+            }
+        })*@
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("Calculatrice")",
+            datatype: "json",
+            data: { number1: val1, number2: val2 },
+            success: function (msg) {
+                document.getElementById("SpanMessage").textContent = JSON.stringify(msg);
+            },
+            error: function (req, status, error) {
+                document.getElementById("SpanMessage").textContent = error;
+
+            }
+        });
+    });
+</script>
